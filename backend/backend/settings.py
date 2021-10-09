@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'rest_auth.registration',
     
-    # Django APps
+    # Django apps
     'candidates',
     'accounts',
+    'companies',
+    'tags',
 ]
 
 MIDDLEWARE = [
