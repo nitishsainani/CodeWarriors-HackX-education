@@ -1,18 +1,18 @@
 from django.db import models
-from accounts.models import User
+#from accounts.models import User
 from tags.models import Tag
 from candidates.models import Candidate
 from base_models.models import BaseTimestampModel
 
 
 class Company(BaseTimestampModel):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    company_name = models.CharField(default="", null=True, blank=True, max_length=50, unique=True)
-    logo = models.ImageField()
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE)
+    company_name = models.CharField(default="", null=True, blank=True, max_length=50, )
+    logo = models.ImageField(null=True, blank=True)
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
-        return "Candidate: {}".format(self.user.email)
+        return "Company: {}".format(self.company_name)
 
 
 class CompanyRating(BaseTimestampModel):
@@ -34,6 +34,9 @@ class Task(BaseTimestampModel):
     points = models.PositiveIntegerField()
     tags = models.ManyToManyField(Tag)
     is_open = models.BooleanField()
+
+    def __str__(self):
+        return "{} : {}".format(self.company.company_name, self.task_name)
 
 
 class TaskSubmission(BaseTimestampModel):

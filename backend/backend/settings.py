@@ -152,10 +152,11 @@ REST_FRAMEWORK = {
     ],
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAdminUser',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser',
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ],
+    ],
     # 'DEFAULT_FILTER_BACKENDS': [
     #     'django_filters.rest_framework.DjangoFilterBackend'
     # ],
@@ -179,7 +180,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 #Custom user Config
 AUTH_USER_MODEL = 'accounts.User'
-# ACCOUNT_ADAPTER = 'accounts.adapters.CustomUserAccountAdapter' #saving custom user using rest api
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomUserAccountAdapter' #saving custom user using rest api
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False

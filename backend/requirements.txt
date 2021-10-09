@@ -1,4 +1,5 @@
 asgiref==3.4.1
+cached-property==1.5.2
 certifi==2021.10.8
 cffi==1.14.6
 charset-normalizer==2.0.6
@@ -7,11 +8,16 @@ defusedxml==0.7.1
 Django==3.1.7
 django-allauth==0.45.0
 django-rest-auth==0.9.5
+django-restql==0.14.0
+django-url-filter==0.3.15
 djangorestframework==3.12.4
+enum-compat==0.0.3
 idna==3.2
 oauthlib==3.1.1
+Pillow==8.3.2
 pycparser==2.20
 PyJWT==2.2.0
+pyPEG2==2.15.2
 python3-openid==3.2.0
 pytz==2021.3
 requests==2.26.0
