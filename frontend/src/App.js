@@ -1,14 +1,38 @@
+import "./App.css";
+import React, { lazy, Suspense } from "react";
+import Navbar from "./components/navigation";
+import Loading from "./components/base/loading";
+import NotFound from "./components/base/notFound";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
-import './App.css';
-import Navigation from './components/navigation';
-import Home from './Layouts/home';
+const Home = lazy(() => {
+  return import("./pages/home");
+});
+const Login = lazy(() => {
+  return import("./pages/login");
+});
+const Signup = lazy(() => {
+  return import("./pages/signup");
+});
 
 function App() {
   return (
-    <div className="App">
-      <Navigation/>
-      <Home/>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route exact path="/" component={Home} />  
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/Signup" component={Signup} />
+            <Route exact path="/*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
+    </Router>
   );
 }
 
