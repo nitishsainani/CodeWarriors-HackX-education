@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', #added manually
 
     # Third Party
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
     
     # Django APps
     'candidates',
@@ -127,5 +132,51 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS= [
+    BASE_DIR / 'static',
+]
+STATIC_ROOT= BASE_DIR / "static" / "static_root"
 
+
+MEDIA_URL= '/media/'
+MEDIA_ROOT= BASE_DIR / "static" / "media_root"
+
+#rest framework config
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAdminUser',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ],
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     'django_filters.rest_framework.DjangoFilterBackend'
+    # ],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 2,
+}
+
+#Rest Auth config
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = { 
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+}
+
+# REST_AUTH_REGISTER_PERMISSION_CLASSES = (
+#         'rest_framework.permissions.IsAdminUser',
+#)
+
+
+#Custom user Config
 AUTH_USER_MODEL = 'accounts.User'
+# ACCOUNT_ADAPTER = 'accounts.adapters.CustomUserAccountAdapter' #saving custom user using rest api
+
+SITE_ID = 1

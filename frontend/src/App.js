@@ -1,4 +1,4 @@
-import "./App.css";
+
 import React, { lazy, Suspense } from "react";
 import Navbar from "./components/navigation";
 import Loading from "./components/base/loading";
@@ -14,6 +14,9 @@ const Login = lazy(() => {
 const Signup = lazy(() => {
   return import("./pages/signup");
 });
+const StudentDashboard=lazy(()=>{
+  return import("./pages/StudentDashboard")
+})
 
 function App() {
   return (
@@ -26,6 +29,7 @@ function App() {
             <Route exact path="/" component={Home} />  
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Signup" component={Signup} />
+            <Route path="/student-dashboard" component={StudentDashboard} />
             <Route exact path="/*">
               <NotFound />
             </Route>
