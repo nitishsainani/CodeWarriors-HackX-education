@@ -1,16 +1,16 @@
-# CodeWarriors-HackX-education
+# CodeWarriors-HackX-Education
 
-We are going to solve the biggest issue in education system. That is, what they are learning are not up-to date,An oppurtunity for students to learn with Indusrty. Build their profile according to the Indusrty & the Company of their choice.
+We are going to solve the biggest issue in the Education system. That's, what they are teaching are not up-to date. An oppurtunity for students to learn with companies. Build their profile according to the Domain & the Company of their choice.
 
 
-__*Setting up in your local system*__
+# *Setting-Up in your local system*
 
 Prerequisites:
 * Python-3 https://www.python.org/downloads/
 * Node https://nodejs.org/en/
 
-Installation Guidelines
-* download the source code
+## Download the source code
+
 ```shell
 git clone https://github.com/nitishsainani/CodeWarriors-HackX-education.git 
 ```
@@ -20,7 +20,23 @@ _move to the main directory_
   cd CodeWarriors-HackX-education
 ```
 
-_setting up frontend_
+## Setup Backend
+```shell
+  cd backend
+```
+- Install dependencies
+```shell
+  pip install -r requirements.txt 
+```
+
+- Run Server
+```shell
+  python manage.py runserver 
+```
+
+visit http://127.0.0.1:8000/
+
+### Setup Frontend
 ```shell
   cd frontend
 ```
@@ -36,19 +52,5 @@ _setting up frontend_
 
 visit http://localhost:3000
 
-_setting up backend_
-```shell
-  cd backend
-```
-- Install dependencies
-```shell
-  pip install -r requirements.txt 
-```
 
-- Run Server
-```shell
-  python manage.py runserver 
-```
-
-visit http://127.0.0.1:8000/
 
