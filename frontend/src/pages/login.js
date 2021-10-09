@@ -1,121 +1,85 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from 'react-router-dom';
+// material
+import { styled } from '@mui/material/styles';
+import { Card, Stack, Link, Container, Typography } from '@mui/material';
+// layouts
+import AuthLayout from '../layouts/AuthLayout';
+// components
+import Page from '../components/Page';
+import { MHidden } from '../components/@material-extend';
+import { LoginForm } from '../components/authentication/login';
+import AuthSocial from '../components/authentication/AuthSocial';
 
-//Material ui components
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Grid,
-} from "@material-ui/core";
-// Styles
-import FormStyle from "../muiStyles/formStyles";
-import useStyles from "../muiStyles/baseStyles";
+// ----------------------------------------------------------------------
 
-export default function Login(props) {
-  const { handleSubmit } = props;
-  const FormStyles = FormStyle();
-  const classes = useStyles();
-  const [email, setEmail] = useState(``);
-  const [password, setPassword] = useState(``);
+const RootStyle = styled(Page)(({ theme }) => ({
+  [theme.breakpoints.up('md')]: {
+    display: 'flex'
+  }
+}));
+
+const SectionStyle = styled(Card)(({ theme }) => ({
+  width: '100%',
+  maxWidth: 464,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  margin: theme.spacing(2, 0, 2, 2)
+}));
+
+const ContentStyle = styled('div')(({ theme }) => ({
+  maxWidth: 480,
+  margin: 'auto',
+  display: 'flex',
+  minHeight: '100vh',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  padding: theme.spacing(12, 0)
+}));
+
+// ----------------------------------------------------------------------
+
+export default function Login() {
   return (
-      <>
-    <Container>
-      <Grid container className={FormStyles.container}>
-        <Grid item xs={12}>
-          <Container
-            component="main"
-            maxWidth="xs"
-            className={FormStyles.subContainer}
-          >
-            <Typography
-              component="h1"
-              variant="h5"
-              align="center"
-              color="primary"
-              style={{ fontWeight: "bold" }}
-            >
-              Sign-in
+    <RootStyle title="Login | Minimal-UI">
+      <AuthLayout>
+        Don’t have an account? &nbsp;
+        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register">
+          Get started
+        </Link>
+      </AuthLayout>
+
+      <MHidden width="mdDown">
+        <SectionStyle>
+          <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+            Hi, Welcome Back
+          </Typography>
+          <img src="/static/illustrations/illustration_login.png" alt="login" />
+        </SectionStyle>
+      </MHidden>
+
+      <Container maxWidth="sm">
+        <ContentStyle>
+          <Stack sx={{ mb: 5 }}>
+            <Typography variant="h4" gutterBottom>
+              Sign in to Minimal
             </Typography>
-            <form>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-              />
-              <Link to="#">
-               
-                  <Typography
-                    align="center"
-                    variant="body2"
-                    component="h3"
-                    className={classes.mt}
-                  >
-                    {"Forgot password?"}
-                  </Typography>
-            
+            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
+          </Stack>
+          <AuthSocial />
+
+          <LoginForm />
+
+          <MHidden width="smUp">
+            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+              Don’t have an account?&nbsp;
+              <Link variant="subtitle2" component={RouterLink} to="register">
+                Get started
               </Link>
-              <Button
-                className={classes.mt}
-                onClick={() => handleSubmit(email, password)}
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                Sign In
-              </Button>
-            </form>
-            <Divider className={classes.mt} />
-
-            <Typography align="center" variant="body2" className={classes.mt}>
-              {"Don't have an account ? 👇"}
             </Typography>
-
-            <Link to="/signup">
-              
-                <Button
-                  className={classes.mt}
-                  type="submit"
-                  fullWidth
-                  variant="outlined"
-                  color="primary"
-                >
-                  Sign Up
-                </Button>
-            
-            </Link>
-          </Container>
-        </Grid>
-      </Grid>
-    </Container>
-    </>
+          </MHidden>
+        </ContentStyle>
+      </Container>
+    </RootStyle>
   );
 }
-
-Login.prototype = {
-  handleSubmit: PropTypes.func.isRequired,
-};
