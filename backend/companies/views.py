@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework import filters 
 from .models import Company, CompanyRating, Task, TaskSubmission
 from .serializers import CompanyRatingSerializer, CompanySerializer, TaskSerializer, TaskSubmissionSerializer
-# from url_filter.integrations.drf import DjangoFilterBackend
+from url_filter.integrations.drf import DjangoFilterBackend
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
@@ -22,6 +22,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer 
     permission_classes = []
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    #filter_fields = ['id','company_name',]
+    #search_fields = ['company_name',]
+    ordering = ['-created_at',]
 
 class TaskSubmissionViewSet(viewsets.ModelViewSet):
     queryset = TaskSubmission.objects.all()
