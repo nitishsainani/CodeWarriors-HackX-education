@@ -51,7 +51,7 @@ class RatingView(views.APIView):
             if rated_by:
                 avg_rating /= rated_by
 
-            response = {"company_id" : company.id, "company_name": company.company_name, "rating": avg_rating, "rated_by":rated_by }
+            response = {"company_id" : company.id, "company_name": company.company_name, "logo": company.logo.url,  "rating": avg_rating, "rated_by":rated_by }
             company_ratings.append(response)
         
         return Response(company_ratings)
