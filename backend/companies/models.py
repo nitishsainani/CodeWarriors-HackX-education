@@ -45,5 +45,8 @@ class TaskSubmission(BaseTimestampModel):
     submission_link = models.URLField()
     is_approved = models.BooleanField(default=False)
 
+    def __str__(self):
+        return "{} : {}".format(self.task.task_name, self.candidate.user.first_name)
+
     class Meta:
         unique_together = ('task', 'candidate', )

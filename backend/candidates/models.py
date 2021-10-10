@@ -20,3 +20,6 @@ class CandidatePoints(BaseTimestampModel):
 
     class Meta:
         unique_together = ('candidate', 'company', )
+
+    def __str__(self):
+        return "{} {}pts.".format(self.candidate.user.first_name, self.points)
