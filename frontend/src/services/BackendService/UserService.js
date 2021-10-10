@@ -15,7 +15,7 @@ const getFormData = (data) => {
 export default class UserService {
   static async login(email, password) {
     let user = {};
-    const response = await axios.post(BASE_URL + 'rest-auth/login/', getFormData({ username: email, password: password }), { headers: {"Content-Type": "multipart/form-data" }});
+    const response = await axios.post(BASE_URL + 'rest-auth/login/', getFormData({ username: email, email, password }), { headers: {"Content-Type": "multipart/form-data" }});
     console.log(response);
     user.token = response.data.key;
     console.log(user.token);
