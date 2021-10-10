@@ -11,6 +11,8 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 import MenuPopover from '../../components/MenuPopover';
 //
 import account from '../../_mocks_/account';
+import { UserService } from '../../services/BackendService';
+import { useNavigate } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -18,17 +20,7 @@ const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: homeFill,
-    linkTo: '/404/'
-  },
-  {
-    label: 'Profile',
-    icon: personFill,
-    linkTo: '#'
-  },
-  {
-    label: 'Settings',
-    icon: settings2Fill,
-    linkTo: '#'
+    linkTo: '/'
   }
 ];
 
@@ -44,6 +36,8 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -110,7 +104,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button fullWidth color="inherit" variant="outlined" onClick={() => UserService.logout() & navigate('/login')}>
             Logout
           </Button>
         </Box>

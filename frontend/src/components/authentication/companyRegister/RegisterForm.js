@@ -6,14 +6,16 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
+import { Stack, TextField, IconButton, InputAdornment, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { UserService } from '../../../services/BackendService';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [genericError, setGenericError] = useState(null);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -27,14 +29,20 @@ export default function RegisterForm() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+      firstName: 'Nitish',
+      lastName: 'Sainani',
+      email: 'nitish@gmail.com',
+      password: 'A2JjA@tJQye@4Gb'
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: async (values) => {
+      try {
+        setGenericError(null);
+        await UserService.register(values.firstName, values.lastName, values.email, values.password, true, false);
+        navigate('/dashboard', { replace: true });
+      } catch (e) {
+        setGenericError("Choose a Secure Password > 8 characters and make sure the email is not registered!");
+      }
     }
   });
 
@@ -90,6 +98,7 @@ export default function RegisterForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
+          {genericError && <Typography color={"red"}>{genericError}</Typography>}
 
           <LoadingButton
             fullWidth

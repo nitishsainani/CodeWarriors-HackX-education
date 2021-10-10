@@ -9,3 +9,7 @@ export const storeUser = (userData) => {
 export const clearStorage = () => {
   localStorage.clear();
 };
+
+export const getAuthHeader = () => {
+  return {"Authorization": "Token " + getUser().token}
+}

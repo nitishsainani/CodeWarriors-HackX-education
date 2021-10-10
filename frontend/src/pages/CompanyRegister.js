@@ -1,16 +1,16 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-import { Card, Stack, Link, Container, Typography } from '@mui/material';
+import { Box, Card, Link, Container, Typography } from '@mui/material';
 // layouts
 import AuthLayout from '../layouts/AuthLayout';
 // components
 import Page from '../components/Page';
 import { MHidden } from '../components/@material-extend';
-import { LoginForm } from '../components/authentication/login';
-import { COMPANY_NAME } from '../services/constants';
+import { RegisterForm } from '../components/authentication/companyRegister';
 import { useEffect } from 'react';
 import { UserService } from '../services/BackendService';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -40,7 +40,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
+export default function CompanyRegister() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,45 +48,60 @@ export default function Login() {
   }, [])
 
   return (
-    <RootStyle title="Login | Minimal-UI">
+    <RootStyle title="Register | Minimal-UI">
       <AuthLayout>
-        Don’t have an account? &nbsp;
-        <br/>
-        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register/company">
-          Register Company
+        {"Register for Candidate Here -> "}
+        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register/candidate">
+          Candidate Register
         </Link>
         <br/>
-        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register/candidate">
-          Register Candidate
+        {"Already Registered?  "}
+        <Link underline="none" variant="subtitle2" component={RouterLink} to="/login">
+          Login
         </Link>
       </AuthLayout>
 
       <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
+            Manage the job more effectively with Minimal
           </Typography>
-          <img src="/static/illustrations/illustration_login.png" alt="login" />
+          <img alt="register" src="/static/illustrations/illustration_register.png" />
         </SectionStyle>
       </MHidden>
 
-      <Container maxWidth="sm">
+      <Container>
         <ContentStyle>
-          <Stack sx={{ mb: 5 }}>
+          <Box sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Sign in to {COMPANY_NAME}
+              COMPANY REGISTRATION
             </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
-          </Stack>
+            <Typography sx={{ color: 'text.secondary' }}>
+              Register as an admin of Company
+            </Typography>
+          </Box>
+
           {/*<AuthSocial />*/}
 
-          <LoginForm />
+          <RegisterForm />
+
+          <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
+            By registering, I agree to Minimal&nbsp;
+            <Link underline="always" sx={{ color: 'text.primary' }}>
+              Terms of Service
+            </Link>
+            &nbsp;and&nbsp;
+            <Link underline="always" sx={{ color: 'text.primary' }}>
+              Privacy Policy
+            </Link>
+            .
+          </Typography>
 
           <MHidden width="smUp">
-            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              Don’t have an account?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to="register">
-                Get started
+            <Typography variant="subtitle2" sx={{ mt: 3, textAlign: 'center' }}>
+              Already have an account?&nbsp;
+              <Link to="/login" component={RouterLink}>
+                Login
               </Link>
             </Typography>
           </MHidden>

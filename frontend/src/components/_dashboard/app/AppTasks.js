@@ -43,8 +43,8 @@ function TaskItem({ task, checked, formik, ...other }) {
             variant="body2"
             sx={{
               ...(checked && {
-                color: 'text.disabled',
-                textDecoration: 'line-through'
+                // color: 'text.disabled',
+                // textDecoration: 'line-through'
               })
             }}
           >
@@ -56,7 +56,7 @@ function TaskItem({ task, checked, formik, ...other }) {
   );
 }
 
-export default function AppTasks() {
+export default function Tags({tags, candidateTags}) {
   const formik = useFormik({
     initialValues: {
       checked: [TASKS[2]]
@@ -68,18 +68,19 @@ export default function AppTasks() {
 
   const { values, handleSubmit } = formik;
 
-  return (
+
+  const a = (
     <Card>
       <CardHeader title="Tasks" />
       <Box sx={{ px: 3, py: 1 }}>
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-            {TASKS.map((task) => (
+            {tags && tags.map((tag, idx) => (
               <TaskItem
-                key={task}
-                task={task}
+                key={idx}
+                task={tag.tag_name}
                 formik={formik}
-                checked={values.checked.includes(task)}
+                checked={tag.id in candidateTags}
               />
             ))}
           </Form>
@@ -87,4 +88,5 @@ export default function AppTasks() {
       </Box>
     </Card>
   );
+  return (<div/>)
 }

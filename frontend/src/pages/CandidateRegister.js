@@ -7,8 +7,10 @@ import AuthLayout from '../layouts/AuthLayout';
 // components
 import Page from '../components/Page';
 import { MHidden } from '../components/@material-extend';
-import { RegisterForm } from '../components/authentication/register';
-import AuthSocial from '../components/authentication/AuthSocial';
+import { RegisterForm } from '../components/authentication/candidateRegister';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserService } from '../services/BackendService';
 
 // ----------------------------------------------------------------------
 
@@ -39,10 +41,21 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Register() {
+export default function CandidateRegister() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    UserService.isUserLoggedIn().then(res => res && navigate('/'))
+  }, [])
+
   return (
     <RootStyle title="Register | Minimal-UI">
       <AuthLayout>
+        Company Register? &nbsp;
+        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register/company">
+          Company Register
+        </Link>
+        <br/>
         Already have an account? &nbsp;
         <Link underline="none" variant="subtitle2" component={RouterLink} to="/login">
           Login
@@ -62,14 +75,14 @@ export default function Register() {
         <ContentStyle>
           <Box sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Get started absolutely free.
+              Candidate Register
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              Free forever. No credit card needed.
+              Enter your details Below
             </Typography>
           </Box>
 
-          <AuthSocial />
+          {/*<AuthSocial />*/}
 
           <RegisterForm />
 
