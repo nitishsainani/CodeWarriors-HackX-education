@@ -41,6 +41,7 @@ export default function RegisterForm() {
         await UserService.register(values.firstName, values.lastName, values.email, values.password, true, false);
         navigate('/dashboard', { replace: true });
       } catch (e) {
+        alert(e);
         setGenericError("Choose a Secure Password > 8 characters and make sure the email is not registered!");
       }
     }

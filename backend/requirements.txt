@@ -7,6 +7,7 @@ cryptography==35.0.0
 defusedxml==0.7.1
 Django==3.1.7
 django-allauth==0.45.0
+django-cors-headers==3.10.0
 django-rest-auth==0.9.5
 django-restql==0.14.0
 django-url-filter==0.3.15
