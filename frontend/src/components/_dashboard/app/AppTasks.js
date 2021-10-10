@@ -69,9 +69,9 @@ export default function Tags({tags, candidateTags}) {
   const { values, handleSubmit } = formik;
 
 
-  const a = (
+  return (
     <Card>
-      <CardHeader title="Tasks" />
+      <CardHeader title="Your Tech Tags" />
       <Box sx={{ px: 3, py: 1 }}>
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
@@ -88,5 +88,4 @@ export default function Tags({tags, candidateTags}) {
       </Box>
     </Card>
   );
-  return (<div/>)
 }
