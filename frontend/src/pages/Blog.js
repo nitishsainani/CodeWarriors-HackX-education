@@ -8,6 +8,8 @@ import Page from '../components/Page';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../components/_dashboard/blog';
 //
 import POSTS from '../_mocks_/blog';
+import TasksService from '../services/BackendService/TasksService';
+import {useState, useEffect} from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +22,11 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    TasksService.getTasks().then(setData);
+  }, [])
+
   return (
     <Page title="Dashboard: Blog | Minimal-UI">
       <Container>
@@ -33,7 +40,7 @@ export default function Blog() {
             to="#"
             startIcon={<Icon icon={plusFill} />}
           >
-            New Post
+            New Tasks
           </Button>
         </Stack>
 
@@ -43,8 +50,8 @@ export default function Blog() {
         </Stack>
 
         <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
+          {POSTS.map((task, index) => (
+            <BlogPostCard key={index} post={task} index={index} />
           ))}
         </Grid>
       </Container>

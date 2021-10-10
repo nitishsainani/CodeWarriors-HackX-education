@@ -95,33 +95,33 @@ export default function BlogPostCard({ post, index }) {
             })
           }}
         >
-          <SvgIconStyle
-            color="paper"
-            src="/static/icons/shape-avatar.svg"
-            sx={{
-              width: 80,
-              height: 36,
-              zIndex: 9,
-              bottom: -15,
-              position: 'absolute',
-              ...((latestPostLarge || latestPost) && { display: 'none' })
-            }}
-          />
-          <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
-            sx={{
-              ...((latestPostLarge || latestPost) && {
-                zIndex: 9,
-                top: 24,
-                left: 24,
-                width: 40,
-                height: 40
-              })
-            }}
-          />
+          {/*<SvgIconStyle*/}
+          {/*  color="paper"*/}
+          {/*  src="/static/icons/shape-avatar.svg"*/}
+          {/*  sx={{*/}
+          {/*    width: 80,*/}
+          {/*    height: 36,*/}
+          {/*    zIndex: 9,*/}
+          {/*    bottom: -15,*/}
+          {/*    position: 'absolute',*/}
+          {/*    ...((latestPostLarge || latestPost) && { display: 'none' })*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/*<AvatarStyle*/}
+          {/*  alt={author.name}*/}
+          {/*  src={author.avatarUrl}*/}
+          {/*  sx={{*/}
+          {/*    ...((latestPostLarge || latestPost) && {*/}
+          {/*      zIndex: 9,*/}
+          {/*      top: 24,*/}
+          {/*      left: 24,*/}
+          {/*      width: 40,*/}
+          {/*      height: 40*/}
+          {/*    })*/}
+          {/*  }}*/}
+          {/*/>*/}
 
-          <CoverImgStyle alt={title} src={cover} />
+          {/*<CoverImgStyle alt={title} src={cover} />*/}
         </CardMediaStyle>
 
         <CardContent

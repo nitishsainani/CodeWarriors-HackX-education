@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -12,6 +12,7 @@ import { MHidden } from '../../components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
+import {UserService} from '../../services/BackendService';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,11 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    UserService.getUserData().then(setUserData);
+  }, [])
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -67,7 +73,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {userData.first_name + " " + userData.last_name}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}
@@ -81,43 +87,43 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-        <Stack
-          alignItems="center"
-          spacing={3}
-          sx={{
-            p: 2.5,
-            pt: 5,
-            borderRadius: 2,
-            position: 'relative',
-            bgcolor: 'grey.200'
-          }}
-        >
-          <Box
-            component="img"
-            src="/static/illustrations/illustration_avatar.png"
-            sx={{ width: 100, position: 'absolute', top: -50 }}
-          />
+      {/*<Box sx={{ px: 2.5, pb: 3, mt: 10 }}>*/}
+      {/*  <Stack*/}
+      {/*    alignItems="center"*/}
+      {/*    spacing={3}*/}
+      {/*    sx={{*/}
+      {/*      p: 2.5,*/}
+      {/*      pt: 5,*/}
+      {/*      borderRadius: 2,*/}
+      {/*      position: 'relative',*/}
+      {/*      bgcolor: 'grey.200'*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <Box*/}
+      {/*      component="img"*/}
+      {/*      src="/static/illustrations/illustration_avatar.png"*/}
+      {/*      sx={{ width: 100, position: 'absolute', top: -50 }}*/}
+      {/*    />*/}
 
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography gutterBottom variant="h6">
-              Get more?
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              From only $69
-            </Typography>
-          </Box>
+      {/*    /!*<Box sx={{ textAlign: 'center' }}>*!/*/}
+      {/*    /!*  <Typography gutterBottom variant="h6">*!/*/}
+      {/*    /!*    Get more?*!/*/}
+      {/*    /!*  </Typography>*!/*/}
+      {/*    /!*  <Typography variant="body2" sx={{ color: 'text.secondary' }}>*!/*/}
+      {/*    /!*    From only $69*!/*/}
+      {/*    /!*  </Typography>*!/*/}
+      {/*    /!*</Box>*!/*/}
 
-          <Button
-            fullWidth
-            href="https://material-ui.com/store/items/minimal-dashboard/"
-            target="_blank"
-            variant="contained"
-          >
-            Upgrade to Pro
-          </Button>
-        </Stack>
-      </Box>
+      {/*    /!*<Button*!/*/}
+      {/*    /!*  fullWidth*!/*/}
+      {/*    /!*  href="https://material-ui.com/store/items/minimal-dashboard/"*!/*/}
+      {/*    /!*  target="_blank"*!/*/}
+      {/*    /!*  variant="contained"*!/*/}
+      {/*    /!*>*!/*/}
+      {/*    /!*  Upgrade to Pro*!/*/}
+      {/*    /!*</Button>*!/*/}
+      {/*  </Stack>*/}
+      {/*</Box>*/}
     </Scrollbar>
   );
 

@@ -62,7 +62,7 @@ export default function CandidateDashboard() {
           value={userData.email}
         />
         <Points points={candidateData.points}/>
-        <AppTasks />
+        <AppTasks tags={tags} candidateTags={(candidateData && candidateData.tags) || []}/>
       </Container>
     </Page>
 );
